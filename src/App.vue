@@ -67,19 +67,22 @@
 
 <script>
 import HelloWorld from './components/HelloWorld';
+import { users, comments, posts } from '@/database/data';
+import User from '@/database/models/User'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld,
-  },
-  props: {    
-  },
   data: () => ({
     drawer: null,
   }),
-  created () {
+  async created () {
     this.$vuetify.theme.dark = true
+    await this.$store.dispatch('entities/users/create', { data: users });
+    await this.$store.dispatch('entities/posts/create', { data: posts });
+    await this.$store.dispatch('entities/comments/create', { data: comments });
+    
+    const user = User.query().with('posts').find(2);
+    console.log(user);
   },
 };
 </script>
