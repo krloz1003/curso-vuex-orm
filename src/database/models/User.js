@@ -1,5 +1,6 @@
 import { Model } from '@vuex-orm/core';
 import Post from './Post';
+import Comment from './Comment';
 
 export default class User extends Model {
     static entity = 'users'
@@ -11,7 +12,7 @@ export default class User extends Model {
             email: this.string(''),
             password: this.string('secret'),
             phone: this.number(123456789),
-            comments: [],
+            comments: this.hasMany(Comment, 'user_id'),
             posts: this.hasMany(Post, 'user_id')
         }
     }

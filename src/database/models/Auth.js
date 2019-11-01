@@ -7,7 +7,7 @@ export default class Auth extends Model {
     static fields () {
         return {
             user_id: this.number(0),
-            posts: this.hasMany(User, 'user_id')
+            user: this.hasMany(User, 'user_id')
         }
     }
 }
