@@ -66,7 +66,6 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
 import { users, comments, posts } from '@/database/data';
 import User from '@/database/models/User'
 
