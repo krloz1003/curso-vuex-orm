@@ -34,28 +34,11 @@
     </v-app-bar>
 
     <v-content>
-      <v-container
-        class="fill-height"
-        fluid
-      >
-        <v-row
-          align="center"
-          justify="center"
-        >
-          <v-col class="shrink">
-            <v-tooltip right>
-              <template v-slot:activator="{ on }">
-              </template>
-              <span>Source</span>
-            </v-tooltip>
-            <v-tooltip right>
-              <template v-slot:activator="{ on }">
+      <v-container class="fill-height" fluid >
+        <v-layout justify-center align-center >
+          <router-view />
+        </v-layout>
 
-              </template>
-              <span>Codepen</span>
-            </v-tooltip>
-          </v-col>
-        </v-row>
       </v-container>
     </v-content>
 
@@ -81,7 +64,7 @@ export default {
     await this.$store.dispatch('entities/comments/create', { data: comments });
     
     const user = User.query().with('posts').find(2);
-    console.log(user);
+    //console.log(user);
   },
 };
 </script>

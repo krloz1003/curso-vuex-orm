@@ -4,6 +4,7 @@
             v-model="name"
             :rules="nameRules"
             label="Nombre"
+            v-if="registering"
         ></v-text-field>
         <v-text-field
             v-model="email"
@@ -16,13 +17,36 @@
             label="Password"
             type="password"
             browser-autocomplete="new-password"
-        ></v-text-field>                
+        ></v-text-field>
+        <v-btn
+            :disabled="!valid"
+            color="success"
+            @click="submit"
+        >
+            {{ textButton }}
+        </v-btn>
+        <v-btn
+            color="error"
+            @click="reset"
+        >
+            Limpiar formulario
+        </v-btn>
     </v-form>
 </template>
 
 <script>
 export default {
-    name: 'AuthFormComponent',    
+    name: 'AuthFormComponent',
+    props : {
+        textButton: {
+            type: String,
+            required: true
+        },
+        registering: {
+            type: Boolean,
+            required: true
+        }
+    },
     data () {
         return {
             valid: false,
@@ -43,6 +67,20 @@ export default {
             ]
         }
         
+    },
+    methods: {
+        submit () {
+            if (this.$refs.form.validate() ) {
+                this.$emit('processAuthForm', {
+                    name: this.name,
+                    email: this.email,
+                    password: this.password
+                })
+            }
+        },
+        reset () {
+            this.$refs.form.reset
+        }
     }
 }
 </script>
