@@ -48,6 +48,7 @@
                     .where('email', user.email)
                     .where('password', user.password)
                     .first()
+                
                 if(exist) {
                     const auth = new Auth;
                     auth.$create({ data: { user_id: exist.id }})
