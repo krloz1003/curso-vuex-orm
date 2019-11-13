@@ -6,6 +6,7 @@ export default class Auth extends Model {
 
     static fields () {
         return {
+            id: this.increment(),
             user_id: this.number(0),
             user: this.hasMany(User, 'user_id')
         }

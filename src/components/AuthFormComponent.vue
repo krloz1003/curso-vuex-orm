@@ -16,7 +16,7 @@
             :rules="passwordRules"
             label="Password"
             type="password"
-            browser-autocomplete="new-password"
+            autocomplete="new-password"
         ></v-text-field>
         <v-btn
             :disabled="!valid"
@@ -79,7 +79,8 @@ export default {
             }
         },
         reset () {
-            this.$refs.form.reset
+            console.log('Limpiando el formulario');
+            this.$refs.form.reset()
         }
     }
 }
