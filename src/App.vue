@@ -15,12 +15,15 @@
           </v-list-item-content>
         </v-list-item>
         
-        <v-list-item link>
+        <v-list-item link
+          @click="logout"
+          v-if="auth"
+        >
           <v-list-item-action>
-            <v-icon>mdi-settings</v-icon>
+            <v-icon>mdi-arrow-left</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Settings</v-list-item-title>
+            <v-list-item-title>Cerrar sesión</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       
@@ -77,8 +80,7 @@ export default {
 
       }
     },
-    sections () {
-      console.log(this.auth);
+    sections () {      
       if (!this.auth) {
         return [
           { id:2, name:'Iniciar sesión', route: '/login', icon: 'mdi-call-made', auth: false },
@@ -90,6 +92,19 @@ export default {
         { id:3, name:'Perfil', route: '/profile', icon: 'mdi-account-box', auth: true },
       ]
     }
+  },
+  methods: {
+    logout () {
+      this.auth.$deleteAll();
+      this.$router.push('/login')
+    }
   }
 };
 </script>
+
+<style lang="stylus">
+  body
+    .container
+      background darkslategrey 
+      color: #fff
+</style>
