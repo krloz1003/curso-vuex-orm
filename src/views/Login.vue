@@ -52,9 +52,24 @@
                 if(exist) {
                     const auth = new Auth;
                     auth.$create({ data: { user_id: exist.id }})
+                    this.$updateBus.$emit('showSnackBar', {
+                        show: true,
+                        color: 'success',
+                        text: 'Bienvenido',
+                        icon: 'mdi-check'
+                    });
+
+
                     setTimeout(() => {
                         this.$router.push('/blog')
-                    }, 500)
+                    }, 1000)
+                } else {
+                    this.$updateBus.$emit('showSnackBar', {
+                        show: true,
+                        color: 'red accent-4',
+                        text: 'Credenciales incorrectas',
+                        icon: 'mdi-alert-circle'
+                    });
                 }
             }
         }

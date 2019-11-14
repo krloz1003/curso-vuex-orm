@@ -1,5 +1,15 @@
 <template>
   <v-app id="inspire">
+    <v-snackbar
+      v-model="snackbar.show"
+      :color="snackbar.color"
+      :top="snackbar.top"
+      :right="snackbar.right"
+      :timeout="snackbar.timeout"
+    >
+      <v-icon>{{ snackbar.icon }}</v-icon>{{ snackbar.text }}
+    </v-snackbar>
+
     <v-navigation-drawer v-model="drawer" app clipped >
       <v-list dense>
         
@@ -61,6 +71,16 @@ export default {
   name: 'App',
   data: () => ({
     drawer: null,
+    snackbar: {
+      show: false,
+      color: '',
+      mode: '',
+      timeout: 6000,
+      text: '',
+      top: true,
+      right:true,
+      icon: null
+    }
   }),
   async created () {
     this.$vuetify.theme.dark = true
@@ -93,9 +113,20 @@ export default {
       ]
     }
   },
+  mounted () {
+    this.$updateBus.$on('showSnackBar', (snackbar) => {
+      this.snackbar = Object.assign(this.snackbar, snackbar);
+    })
+  },
   methods: {
     logout () {
       this.auth.$deleteAll();
+      this.$updateBus.$emit('showSnackBar', {
+          show: true,
+          color: 'success',
+          text: 'Sesión cerrada correctamente',
+          icon: 'mdi-check'
+      });
       this.$router.push('/login')
     }
   }
