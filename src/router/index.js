@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Auth from '@/database/models/Auth'
 
 
 Vue.use(VueRouter)
@@ -24,5 +25,21 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title;
+  const auth = Auth.query().first();
+  if (to.meta.requiresAuth && ! auth){
+    return next('/login')
+  }
+
+  if(! to.meta.requiresAuth && auth ){
+    return next('/blog')
+  }
+  
+  next()
+
+})
+
 
 export default router
