@@ -55,12 +55,12 @@ export default {
                 v => !!v || 'El nombre es requerido',
                 v => (v && v.length >= 2) || 'El nombre es demasiado corto'
             ],
-            email: '',
+            email: 'israelp@cursosdesarrolloweb.es',
             emailRules: [
                 v => !!v || 'El email es requerido',
                 v => /.+@.+/.test(v) || 'El formato del email no es correcto'
             ],
-            password: '',
+            password: 'secret',
             passwordRules: [
                 v => !!v || 'El password es requerido',
                 v => (v && v.length >= 6) || 'El password debe tener 6 carácteres mínimo'
