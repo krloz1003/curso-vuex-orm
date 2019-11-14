@@ -24,6 +24,11 @@ const routes = [
     name: 'blog',
     component: () => import(/* webpackChunkName: "blog" */ '../views/Blog.vue'),
     meta: { title: 'Blog', requiresAuth: true }
+  }, {
+    path: '/post/:id',
+    name: 'post-detail',
+    component: () => import(/* webpackChunkName: "post-detail" */ '../views/Post.vue'),
+    meta: { title: 'Detalle de un Post', requiresAuth: true }
   },
 ]
 
