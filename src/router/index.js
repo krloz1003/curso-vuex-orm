@@ -13,6 +13,11 @@ const routes = [
     name: 'login',
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
     meta: { title: 'Iniciar sesión', requiresAuth: false }
+  }, {
+    path: '/register',
+    name: 'register',
+    component: () => import(/* webpackChunkName: "register" */ '../views/Register.vue'),
+    meta: { title: 'Regístrate', requiresAuth: false }
   },
 ]
 
