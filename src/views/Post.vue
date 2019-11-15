@@ -39,6 +39,9 @@
         },
         mounted (){
             this.loadPost()
+            this.$updateBus.$on('refreshComments', () => {
+                this.loadPost();
+            })
         },
         methods: {
             loadPost () {

@@ -61,6 +61,10 @@ export default {
             this.showModal = true;
         },
         removeComment () {
+            Comment.delete(this.comment_id);
+            this.$updateBus.$emit('refreshComments');
+            this.showModal = false;
+            this.comment_id = null;
 
         }
     }
