@@ -8,7 +8,10 @@
                     </v-flex>
                 </v-layout>
             </v-container> 
+            
             <comment-form-component @saveComment="saveComment" />
+
+            <comment-list-component :comments="post.comments"/>
 
         </v-flex>        
     </v-layout>
@@ -20,12 +23,14 @@
     import Comment from '@/database/models/Comment'
     import PostComponent from '../components/Post';
     import CommentFormComponent from '../components/CommentForm';
+    import CommentListComponent from '../components/CommentList';
 
     export default {
         name: 'PostPage',
         components: {
             PostComponent,
-            CommentFormComponent
+            CommentFormComponent,
+            CommentListComponent,
         },
         data() {
             return {
