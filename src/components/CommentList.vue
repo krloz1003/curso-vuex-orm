@@ -14,13 +14,11 @@
                     </v-toolbar>
 
                     <v-list two-line v-if="comments.length">
-                        <template v-for="comment in comments"  >
-                            {{ comment.comment }}
+                        <template v-for="(comment, index) in comments"  >
+                            <comment-item-component :comment="comment" :key="index" />
                             <v-divider></v-divider>
-                        </template>     
-
+                        </template>
                     </v-list>
-
                 </v-card>
             </v-flex>
         </v-layout>
@@ -29,11 +27,15 @@
 
 <script>
 import Comment from '@/database/models/Comment'
+import CommentItemComponent from '../components/CommentItem';
 export default {
     name: "CommentListComponent",
+    components: {
+        CommentItemComponent
+    },
     props: {
         comments: {
-            type: Object,
+            type: Array,
             required: true
         }
     },
