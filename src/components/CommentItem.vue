@@ -9,7 +9,7 @@
             <v-list-item-subtitle v-if="comment.user" v-text="comment.user.name" ></v-list-item-subtitle>
         </v-list-item-content>
 
-        <v-list-item-action>
+        <v-list-item-action v-if="comment.isOwner($store.getters['entities/auth/find'](1).user_id)" >
           <v-btn icon @click="" >
             <v-icon color="red lighten-1">mdi-close</v-icon>
           </v-btn>

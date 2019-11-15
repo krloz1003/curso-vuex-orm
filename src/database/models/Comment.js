@@ -16,4 +16,11 @@ export default class Comment extends Model {
             post: this.belongsTo(Post, 'post_id')
         }
     }
+
+    isOwner (user_id) {
+        return this.user_id === user_id;
+    }
+
+
+
 }
