@@ -15,9 +15,17 @@
 
                     <v-list two-line v-if="comments.length">
                         <template v-for="(comment, index) in comments"  >
-                            <comment-item-component :comment="comment" :key="index" />
+                            <comment-item-component @openModal="openModal" :comment="comment" :key="index" />
                             <v-divider></v-divider>
                         </template>
+
+                        <modal-remove-comment-component
+                            :show-modal="showModal"
+                            v-if="showModal"
+                            @closeModal="showModal = false"
+                            @removeComment="removeComment"
+                        ></modal-remove-comment-component>
+
                     </v-list>
                 </v-card>
             </v-flex>
@@ -28,10 +36,12 @@
 <script>
 import Comment from '@/database/models/Comment'
 import CommentItemComponent from '../components/CommentItem';
+import ModalRemoveCommentComponent from '../components/ModalRemoveComment';
 export default {
     name: "CommentListComponent",
     components: {
-        CommentItemComponent
+        CommentItemComponent,
+        ModalRemoveCommentComponent
     },
     props: {
         comments: {
@@ -41,6 +51,16 @@ export default {
     },
     data () {
         return {
+            showModal: false,
+            comment_id: null
+        }
+    },
+    methods: {
+        openModal (comment_id) {
+            this.comment_id = comment_id;
+            this.showModal = true;
+        },
+        removeComment () {
 
         }
     }

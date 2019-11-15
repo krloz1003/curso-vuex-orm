@@ -10,7 +10,7 @@
         </v-list-item-content>
 
         <v-list-item-action v-if="comment.isOwner($store.getters['entities/auth/find'](1).user_id)" >
-          <v-btn icon @click="" >
+          <v-btn icon @click="$emit('openModal', comment.id)" >
             <v-icon color="red lighten-1">mdi-close</v-icon>
           </v-btn>
         </v-list-item-action>
