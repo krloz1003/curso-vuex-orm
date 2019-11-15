@@ -16,6 +16,8 @@
 
 <script>
     import Post from '@/database/models/Post'
+    import Auth from '@/database/models/Auth'
+    import Comment from '@/database/models/Comment'
     import PostComponent from '../components/Post';
     import CommentFormComponent from '../components/CommentForm';
 
@@ -38,7 +40,15 @@
                 this.post = Post.query().with('comments.user').with('user').find(this.$route.params.id)
             },
             saveComment (comment ) {
-                console.log(comment)
+                const auth = Auth.query().first();
+                Comment.insert({
+                    data: {
+                        comment,
+                        user_id: auth.user_id,
+                        post_id: this.post.id
+                    }
+                });
+                this.loadPost();
             }
         }
     }
